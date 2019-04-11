@@ -219,7 +219,7 @@ Module.register("MMM-CalendarExt", {
   },
 
   getEventsToDraw: function() {
-    var locale = this.CurrentConfigs.system.locale
+    var locale = this.CurrentConfigs.system.locale;
     var profile = this.profile
     var views = this.CurrentConfigs.system.show
     var oldLimit = moment().locale(locale).add(-1,'days').endOf('day')
@@ -643,7 +643,7 @@ Module.register("MMM-CalendarExt", {
     var css = [
       {
         id:'materialDesignIcons',
-        href: 'https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.min.css',
+        href: 'https://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css',
       },
       {
         id:'emojiCss',
@@ -651,7 +651,7 @@ Module.register("MMM-CalendarExt", {
       },
       {
         id:'flag-icon-CSS',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css'
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css'
       }
     ]
     css.forEach(function(c) {

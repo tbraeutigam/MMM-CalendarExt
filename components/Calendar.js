@@ -11,10 +11,143 @@ String.prototype.hashCode = function() {
 	return String((hash >>> 0))
 }
 
-var iCal = require("../vendor/ical.js")
+var iCal = require("../vendor/modIcal.js")
 //var iCal = require("ical")
 //var iCal = require("./ical.js")
-var moment = require("moment")
+var moment = require("../vendor/moment-timezone-with-data.js")
+
+// Processed/Filtered Data from http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml
+// Changed India Standard Time from Asia/Calcutta to Asia/Kolkata
+moment.tz.link([
+	"Dateline Standard Time|Etc/GMT+12",
+	"Aleutian Standard Time|America/Adak",
+	"Hawaiian Standard Time|Pacific/Honolulu",
+	"Marquesas Standard Time|Pacific/Marquesas",
+	"Alaskan Standard Time|America/Anchorage",
+	"Pacific Standard Time (Mexico)|America/Tijuana",
+	"Pacific Standard Time|America/Tijuana",
+	"US Mountain Standard Time|America/Phoenix",
+	"Mountain Standard Time (Mexico)|America/Chihuahua",
+	"Mountain Standard Time|America/Phoenix",
+	"Central America Standard Time|America/Guatemala",
+	"Central Standard Time|America/Chicago",
+	"Easter Island Standard Time|Pacific/Easter",
+	"Central Standard Time (Mexico)|America/Mexico_City",
+	"Canada Central Standard Time|America/Regina",
+	"SA Pacific Standard Time|America/Bogota",
+	"Eastern Standard Time (Mexico)|America/Cancun",
+	"Eastern Standard Time|America/Cancun",
+	"Haiti Standard Time|America/Port-au-Prince",
+	"Cuba Standard Time|America/Havana",
+	"US Eastern Standard Time|America/Indianapolis",
+	"Paraguay Standard Time|America/Asuncion",
+	"Atlantic Standard Time|America/Halifax",
+	"Venezuela Standard Time|America/Caracas",
+	"Central Brazilian Standard Time|America/Cuiaba",
+	"SA Western Standard Time|America/La_Paz",
+	"Pacific SA Standard Time|America/Santiago",
+	"Turks And Caicos Standard Time|America/Grand_Turk",
+	"Newfoundland Standard Time|America/St_Johns",
+	"Tocantins Standard Time|America/Araguaina",
+	"E. South America Standard Time|America/Sao_Paulo",
+	"SA Eastern Standard Time|America/Cayenne",
+	"Argentina Standard Time|America/Buenos_Aires",
+	"Greenland Standard Time|America/Godthab",
+	"Montevideo Standard Time|America/Montevideo",
+	"Magallanes Standard Time|America/Punta_Arenas",
+	"Saint Pierre Standard Time|America/Miquelon",
+	"Bahia Standard Time|America/Bahia",
+	"Azores Standard Time|Atlantic/Azores",
+	"Cape Verde Standard Time|Atlantic/Cape_Verde",
+	"GMT Standard Time|Europe/London",
+	"Greenwich Standard Time|Atlantic/Reykjavik",
+	"W. Europe Standard Time|Europe/Berlin",
+	"Central Europe Standard Time|Europe/Budapest",
+	"Romance Standard Time|Europe/Paris",
+	"Morocco Standard Time|Africa/Casablanca",
+	"Sao Tome Standard Time|Africa/Sao_Tome",
+	"Central European Standard Time|Europe/Warsaw",
+	"W. Central Africa Standard Time|Africa/Lagos",
+	"Jordan Standard Time|Asia/Amman",
+	"GTB Standard Time|Europe/Bucharest",
+	"Middle East Standard Time|Asia/Beirut",
+	"Egypt Standard Time|Africa/Cairo",
+	"E. Europe Standard Time|Europe/Chisinau",
+	"Syria Standard Time|Asia/Damascus",
+	"West Bank Standard Time|Asia/Hebron",
+	"South Africa Standard Time|Africa/Johannesburg",
+	"FLE Standard Time|Europe/Kiev",
+	"Israel Standard Time|Asia/Jerusalem",
+	"Kaliningrad Standard Time|Europe/Kaliningrad",
+	"Sudan Standard Time|Africa/Khartoum",
+	"Libya Standard Time|Africa/Tripoli",
+	"Namibia Standard Time|Africa/Windhoek",
+	"Arabic Standard Time|Asia/Baghdad",
+	"Turkey Standard Time|Europe/Istanbul",
+	"Arab Standard Time|Asia/Riyadh",
+	"Belarus Standard Time|Europe/Minsk",
+	"Russian Standard Time|Europe/Moscow",
+	"E. Africa Standard Time|Africa/Nairobi",
+	"Iran Standard Time|Asia/Tehran",
+	"Arabian Standard Time|Asia/Dubai",
+	"Astrakhan Standard Time|Europe/Astrakhan",
+	"Azerbaijan Standard Time|Asia/Baku",
+	"Russia Time Zone 3|Europe/Samara",
+	"Mauritius Standard Time|Indian/Mauritius",
+	"Saratov Standard Time|Europe/Saratov",
+	"Georgian Standard Time|Asia/Tbilisi",
+	"Caucasus Standard Time|Asia/Yerevan",
+	"Afghanistan Standard Time|Asia/Kabul",
+	"West Asia Standard Time|Asia/Tashkent",
+	"Ekaterinburg Standard Time|Asia/Yekaterinburg",
+	"Pakistan Standard Time|Asia/Karachi",
+	"India Standard Time|Asia/Kolkata",
+	"Sri Lanka Standard Time|Asia/Colombo",
+	"Nepal Standard Time|Asia/Katmandu",
+	"Central Asia Standard Time|Asia/Almaty",
+	"Bangladesh Standard Time|Asia/Dhaka",
+	"Omsk Standard Time|Asia/Omsk",
+	"Myanmar Standard Time|Asia/Rangoon",
+	"SE Asia Standard Time|Asia/Bangkok",
+	"Altai Standard Time|Asia/Barnaul",
+	"W. Mongolia Standard Time|Asia/Hovd",
+	"North Asia Standard Time|Asia/Krasnoyarsk",
+	"N. Central Asia Standard Time|Asia/Novosibirsk",
+	"Tomsk Standard Time|Asia/Tomsk",
+	"China Standard Time|Asia/Shanghai",
+	"North Asia East Standard Time|Asia/Irkutsk",
+	"Singapore Standard Time|Asia/Singapore",
+	"W. Australia Standard Time|Australia/Perth",
+	"Taipei Standard Time|Asia/Taipei",
+	"Ulaanbaatar Standard Time|Asia/Ulaanbaatar",
+	"Aus Central W. Standard Time|Australia/Eucla",
+	"Transbaikal Standard Time|Asia/Chita",
+	"Tokyo Standard Time|Asia/Tokyo",
+	"North Korea Standard Time|Asia/Pyongyang",
+	"Korea Standard Time|Asia/Pyongyang",
+	"Yakutsk Standard Time|Asia/Yakutsk",
+	"Cen. Australia Standard Time|Australia/Adelaide",
+	"AUS Central Standard Time|Australia/Darwin",
+	"E. Australia Standard Time|Australia/Brisbane",
+	"AUS Eastern Standard Time|Australia/Sydney",
+	"West Pacific Standard Time|Pacific/Port_Moresby",
+	"Tasmania Standard Time|Australia/Hobart",
+	"Vladivostok Standard Time|Asia/Vladivostok",
+	"Lord Howe Standard Time|Australia/Lord_Howe",
+	"Bougainville Standard Time|Pacific/Bougainville",
+	"Russia Time Zone 10|Asia/Srednekolymsk",
+	"Magadan Standard Time|Asia/Magadan",
+	"Norfolk Standard Time|Pacific/Norfolk",
+	"Sakhalin Standard Time|Asia/Sakhalin",
+	"Central Pacific Standard Time|Pacific/Guadalcanal",
+	"Russia Time Zone 11|Asia/Kamchatka",
+	"New Zealand Standard Time|Pacific/Auckland",
+	"Fiji Standard Time|Pacific/Fiji",
+	"Chatham Islands Standard Time|Pacific/Chatham",
+	"Tonga Standard Time|Pacific/Tongatapu",
+	"Samoa Standard Time|Pacific/Apia",
+	"Line Islands Standard Time|Pacific/Kiritimati"	
+])
 var Pubsub = require("./Pubsub.js")
 
 function Calendar (calConfig, sender=null, autostart=0) {
@@ -93,9 +226,9 @@ Calendar.prototype.fetch = function() {
 		var events = []
 		var oldEvents = []
 		var eventDate = function(event, time) {
-			return (event[time].length === 8)
-				? moment(event[time], "YYYYMMDD").startOf("day")
-				: moment(event[time])
+			return (event[time]['date'].length === 8)
+				? moment(event[time]['date']).startOf("day")
+				: moment(event[time]['date']);
 		}
 		var now = moment()
 		var today = moment().startOf("day")
@@ -104,7 +237,9 @@ Calendar.prototype.fetch = function() {
 
 		// parsed item iteration
 		for (var e in data) {
+			
 			var event = data[e]
+
 			//var now = moment()
 			//var today = moment().startOf("day")
 			var title = "Unknown Event"
@@ -124,7 +259,7 @@ Calendar.prototype.fetch = function() {
 							? event.summary.val
 							: event.summary
 				} else if (event.description) {
-					title = event.description
+					title = '[Undefined] ' + event.description;
 				}
 				location = event.location || null
 				geo = event.geo || null
@@ -132,7 +267,7 @@ Calendar.prototype.fetch = function() {
 
 				if (!event.uid) {
 					uid
-						= (title + moment(event.start).format("x")).hashCode()
+						= (title + moment(event.start[date]).format("x")).hashCode()
 						+ "@" + this.uid
 				} else {
 					uid = event.uid
@@ -142,6 +277,8 @@ Calendar.prototype.fetch = function() {
 				// Get the start and end dates from the event.  If the end date is undefined,
 				// assume the event starts and ends on the same day.
 				startDate = eventDate(event, "start");
+				
+				
 				if (typeof event.end !== "undefined") {
 					endDate = eventDate(event, "end");
 				} else {
@@ -151,7 +288,7 @@ Calendar.prototype.fetch = function() {
 				var duration = parseInt(endDate.format("x")) - parseInt(startDate.format("x"));
 				// If the start date has a date but no time, assume it"s intended to start
 				// at the start of the day.
-				if (event.start.length === 8) {
+				if (event.start['date'].length === 8) {
 					startDate = startDate.startOf("day");
 				}
 				//RRULE exists? It means recurred.
@@ -266,23 +403,17 @@ Calendar.prototype.fetch = function() {
 				//recurred event fetch over
 				} else {
 					//single
-					startDate = moment(event.start)
-					if (typeof event.end !== "undefined") {
-						//event.end exists.
-						endDate = moment(event.end)
-					} else {
 						//event.end doesn"t exist mean FulldayEvent.
-						if (typeof event.duration !== "undefined") {
-							//event.end doesn"t exist, but duration exists.
-							endDate = moment(startDate).add(moment.duration(event.duration))
-						} else {
-							//event.end and duration don"t exist.
-							//so, if startDate is 000000, It's fullDayEvent.
-							if (startDate.format("HHmmss") == "000000") {
-								isFulldayEvent = 1
-							}
-							endDate = moment(startDate)
+					if (startDate.format() == endDate.format() && typeof event.duration !== "undefined") {
+						//event.end doesn"t exist, but duration exists.
+						endDate = startDate.clone().add(moment.duration(event.duration))
+					} else {
+						//event.end and duration don"t exist.
+						//so, if startDate is 000000, It's fullDayEvent.
+						if (startDate.format("HHmmss") == "000000") {
+							isFulldayEvent = 1
 						}
+						endDate = startDate.clone()
 					}
 					if(
 						(startDate.format("HHmmss") == "000000")
