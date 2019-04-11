@@ -492,9 +492,9 @@ RenderHelper.prototype.eventPeriodString = function(cfg, ev) {
 				prefix = sd.clone().fromNow();
 			}
 			var defaultCalFormat = {
-				sameDay: '[at ]HH:mm',
-				nextDay: '[Tomorrow at]HH:mm',
-				nextWeek: 'dddd[ at ]HH:mm',
+				sameDay: '[at] HH:mm',
+				nextDay: '[Tomorrow at] HH:mm',
+				nextWeek: 'dddd [at] HH:mm',
 				lastDay: '[Yesterday]',
 				lastWeek: '[Last] dddd',
 				sameElse: cfg.dateFormat
