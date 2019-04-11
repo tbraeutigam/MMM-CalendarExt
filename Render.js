@@ -325,8 +325,8 @@ RenderHelper.prototype.getEventDom = function(ev, cfg, matched) {
 	var mode = cfg.mode
 
 	if (mode == "upcoming" && cfg.symbols){
-		if (ev.fullDayEvent == 1 && cfg.symbols['fullDayEvent']) ev.symbol = cfg.symbols['fullDayEvent'];
-		if (ev.recurred == 1 && cfg.symbols['recurred']) ev.symbol = cfg.symbols['recurred'];
+		if (ev.fullDayEvent == 1 && cfg.symbols["fullDayEvent"]) {ev.symbol = cfg.symbols["fullDayEvent"]};
+		if (ev.recurred == 1 && cfg.symbols["recurred"]) {ev.symbol = cfg.symbols["recurred"]};
 	}
 
 	var eventWrapper = document.createElement("li")
@@ -477,8 +477,8 @@ RenderHelper.prototype.getEventDom = function(ev, cfg, matched) {
 RenderHelper.prototype.eventPeriodString = function(cfg, ev) {
 	var mode = cfg.mode
 	var lc = this.locale
-	var sd = moment(parseInt(ev.startDate)).locale(lc)
-	var ed = moment(parseInt(ev.endDate)).locale(lc)
+	var sd = moment(parseInt(ev.startDate))
+	var ed = moment(parseInt(ev.endDate))
 	var text = ""
 	if (mode == "upcoming") {
 		if(cfg.useRelative && !cfg.useCalendar) {
@@ -487,32 +487,32 @@ RenderHelper.prototype.eventPeriodString = function(cfg, ev) {
 		}
 		if (cfg.useCalendar) {
 
-			var prefix = '';
+			var prefix = "";
 			if(cfg.useRelative){
 				prefix = sd.clone().fromNow();
-				prefix += ' ';
+				prefix += " ";
 			}
 			var defaultCalFormat = {
-				sameDay: '[at] HH:mm',
-				nextDay: '[Tomorrow at] HH:mm',
-				nextWeek: 'dddd [at] HH:mm',
-				lastDay: '[Yesterday]',
-				lastWeek: '[Last] dddd',
+				sameDay: "[at] HH:mm",
+				nextDay: "[Tomorrow at] HH:mm",
+				nextWeek: "dddd [at] HH:mm",
+				lastDay: "[Yesterday]",
+				lastWeek: "[Last] dddd",
 				sameElse: cfg.dateFormat
 			}
 
 			var getTmpl = function(t){
-				if (cfg.calFormat[t]) return cfg.calFormat[t];
+				if (cfg.calFormat[t]) {return cfg.calFormat[t]};
 				return defaultCalFormat[t];
 			}
 
 			text = sd.calendar(null, {
-				sameDay:  '[' + prefix + ']' + getTmpl('sameDay'),
-				nextDay:  getTmpl('nextDay'),
-				nextWeek: getTmpl('nextWeek'),
-				lastDay:  getTmpl('lastDay'),
-				lastWeek: getTmpl('lastWeek'),
-				sameElse: getTmpl('sameElse')
+				sameDay:  "[" + prefix + "]" + getTmpl("sameDay"),
+				nextDay:  getTmpl("nextDay"),
+				nextWeek: getTmpl("nextWeek"),
+				lastDay:  getTmpl("lastDay"),
+				lastWeek: getTmpl("lastWeek"),
+				sameElse: getTmpl("sameElse")
 			});
 			return text
 		}
@@ -531,7 +531,7 @@ RenderHelper.prototype.eventPeriodString = function(cfg, ev) {
 
 	var isSameTime = (ed.format("YYMMDDHHmm") == sd.format("YYMMDDHHmm")) ? 1 : 0
 	var isSameDay = (ed.format("YYMMDD") == sd.format("YYMMDD")) ? 1 : 0
-	
+
 	if(ev.fullDayEvent) {
 		var format = cfg.fullDayEventDateFormat
 		text = sd.format(format)
