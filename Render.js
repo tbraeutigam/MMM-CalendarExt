@@ -490,6 +490,7 @@ RenderHelper.prototype.eventPeriodString = function(cfg, ev) {
 			var prefix = '';
 			if(cfg.useRelative){
 				prefix = sd.clone().fromNow();
+				prefix += ' ';
 			}
 			var defaultCalFormat = {
 				sameDay: '[at] HH:mm',
