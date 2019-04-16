@@ -264,21 +264,23 @@ RenderHelper.prototype.getSlotDom = function(mode, cfgView) {
 			title = cfg.title
 		}
 
-		var headerWrapper = document.createElement("div")
-		headerWrapper.className = "header"
-		var headerTitleWrapper = document.createElement("div")
-		headerTitleWrapper.className = "title"
-		var headerSubtitleWrapper = document.createElement("div")
-		headerSubtitleWrapper.className = "subtitle"
+		if (cfg.displayTitle){
+			var headerWrapper = document.createElement("div")
+			headerWrapper.className = "header"
+			var headerTitleWrapper = document.createElement("div")
+			headerTitleWrapper.className = "title"
+			var headerSubtitleWrapper = document.createElement("div")
+			headerSubtitleWrapper.className = "subtitle"
 
-		headerTitleWrapper.innerHTML = title
-		headerSubtitleWrapper.innerHTML = subtitle
+			headerTitleWrapper.innerHTML = title
+			headerSubtitleWrapper.innerHTML = subtitle
 
-		headerWrapper.appendChild(headerTitleWrapper)
-		headerWrapper.appendChild(headerSubtitleWrapper)
+			headerWrapper.appendChild(headerTitleWrapper)
+			headerWrapper.appendChild(headerSubtitleWrapper)
 
-		slotWrapper.appendChild(headerWrapper)
 
+			slotWrapper.appendChild(headerWrapper)
+		}
 		var eventsBoardWrapper = document.createElement("div")
 		eventsBoardWrapper.className = "eventsBoard"
 		var eventsWrapper = document.createElement("ul")

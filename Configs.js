@@ -76,6 +76,7 @@ var DEFAULT_CONFIG = {
 		classPatternWhere: ["title"],
 		symbolPattern: [],
 		symbolPatternWhere: ["title"],
+		displayTitle: true
 	},
 	defaultCalendar: {
 		name: null,
